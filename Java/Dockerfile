@@ -24,5 +24,3 @@ RUN update-alternatives --install /usr/bin/javac javac ${JAVA_HOME}/bin/javac 10
 
 RUN update-alternatives --install /usr/bin/jar jar ${JAVA_HOME}/bin/jar 100 && \
 	update-alternatives --set jar ${JAVA_HOME}/bin/jar
-
-ENTRYPOINT ["java"]
