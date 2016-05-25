@@ -1,20 +1,19 @@
 FROM debian:8
 
-ENV JDK_BUILD 14
-ENV JDK_PATCH 91
-ENV JDK_VERSION 1.8.0_${JDK_PATCH}
+ENV JRE_BUILD 14
+ENV JRE_PATCH 91
+ENV JRE_VERSION 1.8.0_${JRE_PATCH}
 
-ENV JAVA_HOME /usr/lib/jvm/jdk${JDK_VERSION}
+ENV JAVA_HOME /usr/lib/jvm/jdk${JRE_VERSION}
 
 RUN mkdir /usr/lib/jvm
 
 RUN apt-get update \
     && apt-get install -y curl \
-    && curl -s -L -b "oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u${JDK_PATCH}-b${JDK_BUILD}/jdk-8u${JDK_PATCH}-linux-x64.tar.gz | tar -C /usr/lib/jvm -xzf - \
+    && curl -s -L -b "oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u${JRE_PATCH}-b${JRE_BUILD}/server-jre-8u${JRE_PATCH}-linux-x64.tar.gz | tar -C /usr/lib/jvm -xzf - \
     && apt-get purge -y curl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-  
 
 RUN update-alternatives --install /usr/bin/java java ${JAVA_HOME}/bin/java 100 && \
 	update-alternatives --set java ${JAVA_HOME}/bin/java
